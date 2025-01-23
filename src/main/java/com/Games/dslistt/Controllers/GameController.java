@@ -4,25 +4,29 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import com.Games.dslistt.dto.GameListDTO;
-import com.Games.dslistt.services.GameListService;
+import com.Games.dslistt.dto.GameDTO;
+import com.Games.dslistt.dto.GameMinDTO;
+import com.Games.dslistt.services.GameService;
 
-@RestController
-@RequestMapping(value="/lists")
 public class GameController {
 	
 	@Autowired
-	private GameListService gameListService;
+	private GameService gameService;
 	
 	@GetMapping
-	public List<GameListDTO> findAll(){
-		List<GameListDTO> result = gameListService.findAll();
-		return result;
-		
+	public GameDTO findById(@PathVariable Long id) {
+		 GameDTO result= gameService.findbyId(id);
+		 return result;
 	}
+	
+	@GetMapping
+	public List<GameMinDTO> findAll(){
+		List<GameMinDTO> result = gameService.findAll();
+		return result;
+	}
+	
 	
 	
 }
